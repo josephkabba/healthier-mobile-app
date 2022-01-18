@@ -16,7 +16,7 @@ val Typography = Typography(
 
     body2 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 36.sp
     )
     /* Other default text styles to override

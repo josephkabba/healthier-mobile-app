@@ -1,11 +1,11 @@
 package com.healthier.healthier.ui.theme
 
-import android.graphics.Color
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 
 @Immutable
 data class CustomColors(
@@ -23,23 +23,26 @@ data class CustomShapes(
     val shapes: Shapes
 )
 
-private val DarkColorPalette = darkColors(
-    primary = primary,
-    secondary = secondary
-)
-
-private val LightColorPalette = lightColors(
-    primary = primary,
-    secondary = secondary
-
-    /* Other default colors to override
+/* Other default colors to override
     background = Color.White,
     surface = Color.White,
-    onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,
     onSurface = Color.Black,
     */
+
+private val DarkColorPalette = darkColors(
+    primary = primary,
+    secondary = secondary,
+    secondaryVariant = darkGreen,
+    onBackground = Color.Black
+)
+
+private val LightColorPalette = lightColors(
+    primary = primary,
+    secondary = secondary,
+    primaryVariant = lightGreen,
+    onBackground = Color.White
 )
 
 val LocalCustomColors = staticCompositionLocalOf {
@@ -64,6 +67,7 @@ fun HealthierTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composa
     } else {
         LightColorPalette
     }
+
 
     MaterialTheme(
         colors = colors,
