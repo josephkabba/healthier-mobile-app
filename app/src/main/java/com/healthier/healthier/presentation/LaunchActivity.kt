@@ -17,10 +17,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import com.healthier.healthier.R
 import com.healthier.healthier.presentation.common.Circle
 import com.healthier.healthier.ui.theme.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
@@ -29,14 +31,14 @@ class LaunchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HealthierTheme(darkTheme = false) {
-                    Screen()
+                LaunchScreen()
             }
         }
 
         val intent = Intent(this, Authentication::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-        runBlocking {
+        lifecycleScope.launch {
             delay(3000)
             startActivity(intent)
         }
@@ -46,11 +48,11 @@ class LaunchActivity : AppCompatActivity() {
 @Preview(showBackground = true)
 @Composable
 fun Preview(){
-    Screen()
+    LaunchScreen()
 }
 
 @Composable
-fun Screen(){
+fun LaunchScreen(){
     val padding: Dp = 16.dp
 
     Circle (color = lightGreen.copy(alpha = 0.6F),
@@ -79,7 +81,7 @@ fun Screen(){
 
 @Composable
 fun Poster(padding: Dp){
-    Card (backgroundColor = primary, elevation = 30.dp, shape = HealthierTheme.shapes.shapes.medium)  {
+    Card (backgroundColor = healthierGreen, elevation = 20.dp, shape = HealthierTheme.shapes.shapes.medium)  {
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()

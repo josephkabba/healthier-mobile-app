@@ -24,8 +24,6 @@ data class CustomShapes(
 )
 
 /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,
     onSurface = Color.Black,
@@ -35,14 +33,16 @@ private val DarkColorPalette = darkColors(
     primary = primary,
     secondary = secondary,
     secondaryVariant = darkGreen,
-    onBackground = Color.Black
+    surface = primary,
+    background = Color.Black,
 )
 
 private val LightColorPalette = lightColors(
     primary = primary,
     secondary = secondary,
     primaryVariant = lightGreen,
-    onBackground = Color.White
+    surface = primary,
+    background = Color.White
 )
 
 val LocalCustomColors = staticCompositionLocalOf {

@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Healthier">
+        android:theme="@style/Theme.Healthier.NoActionBar">
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true" />
@@ -18,8 +18,7 @@
         <activity
             android:name=".presentation.LaunchActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Healthier.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
