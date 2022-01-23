@@ -35,6 +35,8 @@ private val DarkColorPalette = darkColors(
     secondaryVariant = darkGreen,
     surface = primary,
     background = Color.Black,
+    onError = Color.Red,
+    error = Color.Red
 )
 
 private val LightColorPalette = lightColors(
@@ -42,7 +44,9 @@ private val LightColorPalette = lightColors(
     secondary = secondary,
     primaryVariant = lightGreen,
     surface = primary,
-    background = Color.White
+    background = Color.White,
+    onError = Color.Red,
+    error = Color.Red
 )
 
 val LocalCustomColors = staticCompositionLocalOf {

@@ -67,6 +67,7 @@ fun CustomTextField(modifier: Modifier = Modifier,
             errorLabelColor = Color.Red,
             errorCursorColor = Color.Red,
             errorIndicatorColor = Color.Red,
+            errorTrailingIconColor = Color.Red,
             focusedIndicatorColor = healthierBlue
         ))
 }
@@ -92,11 +93,11 @@ fun CustomButton(modifier: Modifier = Modifier,
             .fillMaxWidth()
             .height(51.dp),
         elevation = ButtonDefaults.elevation(
-            defaultElevation = 10.dp,
-            pressedElevation = 5.dp,
+            defaultElevation = 6.dp,
+            pressedElevation = 1.dp,
             disabledElevation = 0.dp
         ),
         content = {
-        Text(text = title, fontWeight = FontWeight.Bold, fontSize = 24.sp)
+        Text(text = title, fontWeight = FontWeight.Bold, fontSize = 18.sp)
     })
 }
