@@ -7,6 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,11 +33,13 @@ class LaunchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HealthierTheme(darkTheme = false) {
-                LaunchScreen()
+                Surface(color = MaterialTheme.colors.background) {
+                    LaunchScreen()
+                }
             }
         }
 
-        val intent = Intent(this, Authentication::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
         lifecycleScope.launch {
@@ -81,7 +85,7 @@ fun LaunchScreen(){
 
 @Composable
 fun Poster(padding: Dp){
-    Card (backgroundColor = healthierGreen, elevation = 20.dp, shape = HealthierTheme.shapes.shapes.medium)  {
+    Card (backgroundColor = healthierGreen, elevation = 4.dp, shape = MaterialTheme.shapes.medium)  {
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
