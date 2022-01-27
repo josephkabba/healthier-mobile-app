@@ -1,25 +1,21 @@
 package com.healthier.healthier.presentation.common
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -44,8 +40,11 @@ fun Circle(modifier: Modifier = Modifier, color: Color, size: Dp = 32.dp) {
 fun Notification(name: String,
                  date: String,
                  detail: String,
-                 expanded: MutableState<Boolean> = mutableStateOf(false)
 ){
+    val expanded = remember {
+        mutableStateOf(false)
+    }
+
     Column(modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.SpaceEvenly) {
         Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
@@ -54,7 +53,8 @@ fun Notification(name: String,
         }
 
         Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom, modifier = Modifier.fillMaxWidth()) {
-            Text(text = detail, modifier = Modifier.clickable { expanded.value = !expanded.value })
+            ExpandableText(text = detail, isExpanded = expanded)
+
             if (expanded.value){
                 Icon(painter = painterResource(id = R.drawable.ic_arrow_up_24), contentDescription = "minimise")
             }else {
@@ -65,7 +65,7 @@ fun Notification(name: String,
         Box(modifier = Modifier
             .fillMaxWidth()
             .height(1.dp)
-            .background(Color.White)
+            .background(healthierGray)
             .clip(
                 RoundedCornerShape(5.dp)
             ))
@@ -137,6 +137,49 @@ fun CustomButton(modifier: Modifier = Modifier,
         content = {
         Text(text = title, fontWeight = FontWeight.Bold, fontSize = 18.sp)
     })
+}
+
+@Composable
+fun ExpandableText(modifier: Modifier = Modifier, text: String, isExpanded: MutableState<Boolean>){
+    val MINIMIZED_MAX_LINES = 3
+
+    val textLayoutResultState = remember { mutableStateOf<TextLayoutResult?>(null) }
+    var isClickable by remember { mutableStateOf(false) }
+    var finalText by remember { mutableStateOf(text) }
+
+    Text(
+        text = finalText,
+        maxLines = if (isExpanded.value) Int.MAX_VALUE else MINIMIZED_MAX_LINES,
+        onTextLayout = { textLayoutResultState.value = it },
+        modifier = modifier
+            .clickable(enabled = isClickable) { isExpanded.value = !isExpanded.value }
+            .animateContentSize(),
+    )
+
+    val textLayoutResult = textLayoutResultState.value
+
+    LaunchedEffect(textLayoutResult) {
+        if (textLayoutResult == null) return@LaunchedEffect
+
+        when {
+            isExpanded.value -> {
+                finalText = text
+            }
+            !isExpanded.value && textLayoutResult.hasVisualOverflow -> {
+                val lastCharIndex = textLayoutResult.getLineEnd(MINIMIZED_MAX_LINES - 1)
+                val showMoreString = "..."
+                val adjustedText = text
+                    .substring(startIndex = 0, endIndex = lastCharIndex)
+                    .dropLast(showMoreString.length)
+                    .dropLastWhile { it == ' ' || it == '.' }
+
+                finalText = "$adjustedText$showMoreString"
+
+                isClickable = true
+            }
+        }
+    }
+
 }
 
 @Preview(showBackground = true)

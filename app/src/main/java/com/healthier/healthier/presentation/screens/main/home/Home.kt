@@ -1,7 +1,12 @@
 package com.healthier.healthier.presentation.screens.main.home
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -17,36 +22,51 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.healthier.healthier.presentation.common.Notification
 import com.healthier.healthier.ui.theme.healthierGray
 import com.healthier.healthier.ui.theme.healthierGreen
+import kotlinx.coroutines.flow.flow
 
 @Composable
 fun Home(navController: NavController, homeViewModel: HomeViewModel = viewModel()) {
-    Column(modifier = Modifier
+    LazyColumn(modifier = Modifier
         .padding(16.dp)
         .fillMaxSize()) {
 
-        Text(text = "Home", fontSize = 28.sp)
+        item{
+            Column {
 
-        Spacer(modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth())
+            Text(text = "Home", fontSize = 28.sp)
 
-        HomeCard()
+            Spacer(modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth())
 
-        Spacer(modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth())
+            HomeCard()
 
-        Text(text = "Notifications", fontSize = 20.sp)
+            Spacer(modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth())
 
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .height(1.dp)
-            .background(healthierGray)
-            .clip(
-                RoundedCornerShape(5.dp)
-            ))
+            Text(text = "Notifications", fontSize = 20.sp)
+
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(healthierGray)
+                .clip(
+                    RoundedCornerShape(5.dp)
+                ))
+            }
+        }
+
+
+        //TODO
+        //Replace with a flow
+        //this is for UI testing purposes
+        items(5) {
+            Notification(name = "name", date = "4/4/22", detail = "This is a notifikdkfnrnunrnrnofornoeonounornonfunrnonufnunrnfnoneonfnruuroeourcation of a notification that notifies you about something")
+        }
 
     }
 }
@@ -81,5 +101,5 @@ private fun HomeCard(workouts: Int = 0, meals: Int = 0){
 @Composable
 private fun HomePreview(){
     val navController = rememberNavController()
-    Home(navController = navController)
+    Home(navController = navController, HomeViewModel())
 }
