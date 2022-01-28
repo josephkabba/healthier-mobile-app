@@ -86,7 +86,7 @@ fun Login(loginViewModel: LoginViewModel = viewModel(), navController: NavContro
             trailingIcon = {
                 if (loginState.showPassword){
                     IconButton(content = {
-                        Image(painter = painterResource(id = R.drawable.ic_visibility_off_24), contentDescription = "eye")
+                        Image(painter = painterResource(id = R.drawable.ic_visibility_off_24), contentDescription = "see password")
                     }, onClick = {
                         loginState.showPassword = false
                     })

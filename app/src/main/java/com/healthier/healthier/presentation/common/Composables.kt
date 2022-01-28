@@ -48,17 +48,18 @@ fun Notification(name: String,
     Column(modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.SpaceEvenly) {
         Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-            Text(text = name, fontSize = 24.sp)
+            Text(text = name, fontSize = 20.sp, color = healthierBlue)
             Text(text = date, fontSize = 14.sp, fontWeight = FontWeight.Light)
         }
 
         Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom, modifier = Modifier.fillMaxWidth()) {
-            ExpandableText(text = detail, isExpanded = expanded)
+            ExpandableText(text = detail, isExpanded = expanded, modifier = Modifier.weight(11f))
+
 
             if (expanded.value){
-                Icon(painter = painterResource(id = R.drawable.ic_arrow_up_24), contentDescription = "minimise")
+                Icon(painter = painterResource(id = R.drawable.ic_arrow_up_24), contentDescription = "minimise", modifier = Modifier.weight(1f))
             }else {
-                Icon(painter = painterResource(id = R.drawable.ic_arrow_down_24), contentDescription = "expand")
+                Icon(painter = painterResource(id = R.drawable.ic_arrow_down_24), contentDescription = "expand", modifier = Modifier.weight(1f))
             }
         }
 
@@ -151,6 +152,7 @@ fun ExpandableText(modifier: Modifier = Modifier, text: String, isExpanded: Muta
         text = finalText,
         maxLines = if (isExpanded.value) Int.MAX_VALUE else MINIMIZED_MAX_LINES,
         onTextLayout = { textLayoutResultState.value = it },
+        fontWeight = FontWeight.Light,
         modifier = modifier
             .clickable(enabled = isClickable) { isExpanded.value = !isExpanded.value }
             .animateContentSize(),
@@ -179,7 +181,6 @@ fun ExpandableText(modifier: Modifier = Modifier, text: String, isExpanded: Muta
             }
         }
     }
-
 }
 
 @Preview(showBackground = true)

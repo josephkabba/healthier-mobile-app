@@ -20,6 +20,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.healthier.healthier.presentation.common.parentExitTransition
 import com.healthier.healthier.presentation.common.parentPopEnterTransition
 import com.healthier.healthier.presentation.navigation.Screen
+import com.healthier.healthier.presentation.screens.main.account.Account
 import com.healthier.healthier.presentation.screens.main.home.Home
 import com.healthier.healthier.ui.theme.HealthierTheme
 
@@ -74,7 +75,7 @@ class MainActivity : ComponentActivity() {
 
                             }
                             composable(Screen.AccountScreen.route) {
-
+                                Account(navController = navController)
                             }
                         }
                     }
