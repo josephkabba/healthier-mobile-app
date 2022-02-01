@@ -1,4 +1,4 @@
-package com.healthier.healthier.presentation.screens.main.fitness
+package com.healthier.healthier.presentation.screens.main.meals
 
 import androidx.lifecycle.ViewModel
 

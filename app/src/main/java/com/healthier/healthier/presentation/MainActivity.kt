@@ -21,7 +21,9 @@ import com.healthier.healthier.presentation.common.parentExitTransition
 import com.healthier.healthier.presentation.common.parentPopEnterTransition
 import com.healthier.healthier.presentation.navigation.Screen
 import com.healthier.healthier.presentation.screens.main.account.Account
+import com.healthier.healthier.presentation.screens.main.fitness.Fitness
 import com.healthier.healthier.presentation.screens.main.home.Home
+import com.healthier.healthier.presentation.screens.main.meals.Meals
 import com.healthier.healthier.ui.theme.HealthierTheme
 
 class MainActivity : ComponentActivity() {
@@ -69,10 +71,10 @@ class MainActivity : ComponentActivity() {
                                 Home(navController = navController)
                             }
                             composable(Screen.FitnessScreen.route) {
-
+                                Fitness(navController = navController)
                             }
                             composable(Screen.MealsScreen.route) {
-
+                                Meals(navController = navController)
                             }
                             composable(Screen.AccountScreen.route) {
                                 Account(navController = navController)

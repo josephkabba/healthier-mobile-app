@@ -1,6 +1,7 @@
 package com.healthier.healthier.presentation.common
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -183,8 +185,138 @@ fun ExpandableText(modifier: Modifier = Modifier, text: String, isExpanded: Muta
     }
 }
 
+@Composable
+fun WorkOutCard(
+    name: String,
+    weight: String,
+    sets: String,
+    reps: String
+){
+    Card(elevation = 4.dp, shape = HealthierTheme.shapes.shapes.medium, backgroundColor = MaterialTheme.colors.background, modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                shape = HealthierTheme.shapes.shapes.medium,
+                color = MaterialTheme.colors.background
+            )
+            .padding(16.dp)) {
+            Row(horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically){
+                Image(painter = painterResource(id = R.drawable.ic_fitness_24), contentDescription = "")
+                Text(name, fontSize = 20.sp, modifier = Modifier.padding(start = 10.dp))
+            }
+
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.SpaceAround) {
+                    Text(text = weight, fontWeight = FontWeight.Medium, color = healthierGreen, fontSize = 28.sp)
+                    Text(text = "Weight", fontWeight = FontWeight.Light, fontSize = 20.sp)
+                }
+
+                Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceAround) {
+                    Text(text = sets, fontWeight = FontWeight.Medium, color = healthierGreen, fontSize = 28.sp)
+                    Text(text = "Sets", fontWeight = FontWeight.Light, fontSize = 20.sp)
+                }
+
+                Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.SpaceAround) {
+                    Text(text = reps, fontWeight = FontWeight.Medium, color = healthierGreen, fontSize = 28.sp, modifier = Modifier.align(alignment = Alignment.End))
+                    Text(text = "Reps", fontWeight = FontWeight.Light, fontSize = 20.sp)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun MealCard(
+    name: String,
+    image: String,
+    prepTime: String,
+    creationDate: String,
+    cals: String
+){
+    Card(elevation = 4.dp, shape = HealthierTheme.shapes.shapes.medium, backgroundColor = MaterialTheme.colors.background, modifier = Modifier.width(306.dp)) {
+        Column(modifier = Modifier
+            .width(306.dp)
+            .background(
+                shape = HealthierTheme.shapes.shapes.medium,
+                color = MaterialTheme.colors.background
+            )
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(211.dp)
+            ) {
+
+                Image(
+                    painter = painterResource(id = R.drawable.img),
+                    contentDescription = name,
+                    modifier = Modifier
+                        .height(211.dp)
+                        .width(306.dp)
+                )
+
+                Text(
+                    text = name,
+                    color = Color.White,
+                    fontSize = 36.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    modifier = Modifier.padding(start = 10.dp)
+                )
+            }
+
+            Row(
+                verticalAlignment = Alignment.Bottom,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth().padding(10.dp)
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "preparation $name",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Normal,
+                        maxLines = 1
+                    )
+                    Text(
+                        text = "preparation $prepTime",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Light,
+                        maxLines = 1
+                    )
+                    Text(
+                        text = "created $creationDate",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Light,
+                        maxLines = 1
+                    )
+                }
+
+                Text(text = cals, fontSize = 18.sp, fontWeight = FontWeight.Light)
+            }
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
-private fun PreviewComposable(){
+private fun PreviewNotification(){
     Notification(name = "name", date = "date", detail = "this is a notification to notify you about notifications that notify you about information ok ok")
+}
+
+@Preview(showBackground = false)
+@Composable
+private fun PreviewWorkOutCard(){
+    WorkOutCard(name = "Name", weight = "10kg", sets = "3", reps = "10")
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PreviewMealCard(){
+    MealCard(
+        name = "name",
+        image = "",
+        prepTime = "10 minutes",
+        creationDate = "14/5/2022",
+        cals = "100 kcal"
+    )
 }

@@ -33,17 +33,17 @@ private val DarkColorPalette = darkColors(
     primary = primary,
     secondary = secondary,
     secondaryVariant = darkGreen,
-    surface = primary,
+    surface = Color.White,
     background = Color.Black,
     onError = Color.Red,
-    error = Color.Red
+    error = Color.Red,
 )
 
 private val LightColorPalette = lightColors(
     primary = primary,
     secondary = secondary,
-    primaryVariant = lightGreen,
-    surface = primary,
+    secondaryVariant = lightGreen,
+    surface = Color.Black,
     background = Color.White,
     onError = Color.Red,
     error = Color.Red
